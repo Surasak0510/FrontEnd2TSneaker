@@ -64,19 +64,19 @@
                             <p class="w-100 m-0 text-center"><a href="/" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Home">Home</a></p>
                         </div>
                         <div class="col-7 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="product/NewAndOutstanding" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="New and Outstanding">New and Outstanding</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/NewAndOutstanding" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="New and Outstanding">New and Outstanding</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="product/Limited" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Limited">Limited</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/Limited" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Limited">Limited</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="product/Men" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Men">Men</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/Men" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Men">Men</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="product/Woman" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Woman">Woman</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/Woman" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Woman">Woman</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="product/Kid" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Kid">Kid</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/Kid" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Kid">Kid</a></p>
                         </div>
                     </div>
                 </div>
