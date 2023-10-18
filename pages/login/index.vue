@@ -56,6 +56,7 @@
 </template>
 
 <script>
+const Swal = require('sweetalert2')
 export default {
     data() {
         return {
@@ -87,7 +88,18 @@ export default {
             axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                window.location = '/';
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: true,
+                    timer: 3000
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('Saved!', '', 'success')
+                        window.location = '/';
+                    }
+                })
             })
             .catch((error) => {
             console.log(error);

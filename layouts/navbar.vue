@@ -61,22 +61,22 @@
                 <div class="col-12">
                     <div class="row py-2 ">
                         <div class="col-5 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><input style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="button" value="Home"></p>
+                            <p class="w-100 m-0 text-center"><a href="/" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Home">Home</a></p>
                         </div>
                         <div class="col-7 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><input style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="button" value="New and Outstanding"></p>
+                            <p class="w-100 m-0 text-center"><a href="product/NewAndOutstanding" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="New and Outstanding">New and Outstanding</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><input style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="button" value="Limited"></p>
+                            <p class="w-100 m-0 text-center"><a href="product/Limited" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Limited">Limited</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><input style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="button" value="Men"></p>
+                            <p class="w-100 m-0 text-center"><a href="product/Men" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Men">Men</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><input style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="button" value="Woman"></p>
+                            <p class="w-100 m-0 text-center"><a href="product/Woman" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Woman">Woman</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><input style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="button" value="Kid"></p>
+                            <p class="w-100 m-0 text-center"><a href="product/Kid" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Kid">Kid</a></p>
                         </div>
                     </div>
                 </div>
@@ -90,8 +90,8 @@
 export default {
     data() {
         return {
-            heart: 69 ,
-            cart : 8 ,
+            heart: 0 ,
+            cart : 0 ,
         }
     }
 }

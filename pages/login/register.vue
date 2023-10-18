@@ -124,7 +124,7 @@ export default{
                         icon: 'success',
                         title: 'Sign up successfully!',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 3000
                     }).then(
                         window.location = '/login'
                     )
