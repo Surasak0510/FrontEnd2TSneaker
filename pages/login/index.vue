@@ -70,28 +70,30 @@ export default {
         login() {
             const axios = require('axios');
             let data = JSON.stringify({
-            "email": this.email,
-            "password": this.password
+            "Email": this.email,
+            "Password": this.password
             });
 
             let config = {
-            method: 'get',
+            method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://twotsneaker.onrender.com/login',
+            url: 'https://2tsneaker.vercel.app/login',
             headers: { 
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             data : data
             };
 
             axios.request(config)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
-                window.location = '/'
+            console.log(JSON.stringify(response.data));
             })
             .catch((error) => {
             console.log(error);
             });
+
+
+
 
         }
     }
