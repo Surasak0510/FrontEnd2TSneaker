@@ -100,7 +100,7 @@ export default{
                 let data = JSON.stringify({
                     "Username": this.name,
                     "Password": this.password,
-                    "Email": this.password,
+                    "Email": this.email,
                     "tel": this.tel
                 });
     

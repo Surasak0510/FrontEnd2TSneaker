@@ -70,8 +70,8 @@ export default {
         login() {
             const axios = require('axios');
             let data = JSON.stringify({
-            "Email": this.email,
-            "Password": this.password
+                "Email": this.email,
+                "Password": this.password
             });
 
             let config = {
