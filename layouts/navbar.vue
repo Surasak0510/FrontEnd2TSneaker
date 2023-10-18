@@ -39,9 +39,9 @@
                                         <span class="visually-hidden">shopping cart</span>
                                     </span>
                                 </button>
-                                <button type="button" class="btn position-relative mx-3" style="box-shadow: none;">
-                                    <img src="../static/icon/profile_circle.svg" alt="">
-                                </button>
+                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;" href="/register">
+                                    <img src="../static/icon/profile_circle.svg" alt="" >
+                                </a>
                             </div>
                         </div>
                     </div>
