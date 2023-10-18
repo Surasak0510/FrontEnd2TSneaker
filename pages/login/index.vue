@@ -77,7 +77,7 @@ export default {
             let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://2tsneaker.vercel.app/login',
+            url: 'https://twotsneaker.onrender.com/login',
             headers: { 
                 'Content-Type': 'application/json'
             },
