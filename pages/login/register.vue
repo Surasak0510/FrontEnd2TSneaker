@@ -83,6 +83,8 @@
 </template>
 
 <script>
+// CommonJS
+const Swal = require('sweetalert2')
 export default{
     data() {
         return {
@@ -117,7 +119,15 @@ export default{
                 axios.request(config)
                 .then((response) => {
                     console.log(JSON.stringify(response.data));
-                    window.location = '/'
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sign up successfully!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(
+                        window.location = '/login'
+                    )
                 })
                 .catch((error) => {
                     console.log(error);
