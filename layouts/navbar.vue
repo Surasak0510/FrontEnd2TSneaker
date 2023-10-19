@@ -92,14 +92,49 @@ export default {
         return {
             heart: 0 ,
             cart : 0 ,
-            email: ""
+            Email: "",
+            user : {}
+        }
+    },
+    methods: {
+        GetUser() {
+            const axios = require('axios');
+            let data = JSON.stringify({"Email": this.email});
+
+            let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://twotsneaker.onrender.com/read',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+
+            axios.request(config)
+            .then((response) => {
+                let members = response.data
+                members.forEach(e => {
+                    if (e.Email == this.Email) {
+                        this.user = e;
+                        // console.log(e);
+                    }
+                });
+                // console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         }
     },
     mounted() {
-        this.email = localStorage.getItem("email");
-        if (this.email === null) {
+        this.Email = localStorage.getItem("email");
+        if (this.Email === null) {
             window.location = '/login'
         }
+        this.GetUser();
+        // console.log(this.email);
+
 
     }
 }

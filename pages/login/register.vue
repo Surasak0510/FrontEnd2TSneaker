@@ -13,6 +13,18 @@
 
                             <form class="mx-1 mx-md-4">
 
+                                <div class="row">
+                                    <div class="col-7">
+                                        <div class="mb-3">
+                                            <div class="form-text" style="margin: 5px 0px 5px 5px; font-size: medium;">อัพโหลดโลโก้ร้าน</div>
+                                            <div class="input-group">
+                                                <input class="form-control rounded-4" type="file" ref="fileInput" @input="pickFile"  >
+                                                <!-- <img :src="`${previewImage}`" alt="" style="width: 100px; height: 100px;"> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                 <div class="form-outline flex-fill mb-0">
@@ -92,7 +104,7 @@ export default{
             email: "",
             password: "",
             Conpassword: "",
-            tel: "",
+            previewImage: "",
         }
     },
     methods: {
@@ -123,10 +135,12 @@ export default{
                         position: 'center',
                         icon: 'success',
                         title: 'Sign up successfully!',
-                        showConfirmButton: false,
-                        timer: 3000
-                    }).then(
-                        window.location = '/login'
+                        showConfirmButton: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location = '/login'
+                        }
+                    }
                     )
                 })
                 .catch((error) => {
@@ -139,9 +153,20 @@ export default{
                     console.log(error);
                 });
             }
-
-
-        }
+        },
+        pickFile () {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+              let reader = new FileReader
+              reader.onload = e => {
+              this.data.previewImage = e.target.result
+            //   console.log(this.data.previewImage)
+            }
+            reader.readAsDataURL(file[0])
+            this.$emit('input', file[0])
+            }
+        },
     }
 }
 </script>
