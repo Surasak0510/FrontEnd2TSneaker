@@ -15,9 +15,11 @@
         <slide v-for="(item , index) in shoes" :key="index" >
           <div class="col-12 ">
             <div class="row">
-              <div class="col-8 col-md-12 product">
-                <img  :src="`${item.img}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
-              </div>
+              <a :href="`/product/detail?id=${item.id}`">
+                <div class="col-8 col-md-12 product">
+                  <img  :src="`${item.img}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
+                </div>
+              </a>
             </div>
             <div class="row">
               <div class="col-4 col-md-12 d-flex align-content-center flex-wrap ">
@@ -33,9 +35,11 @@
         <slide v-for="(item , index) in shoes" :key="index" >
           <div class="col-12">
             <div class="row">
-              <div class="col-md-12 product">
-                <img  :src="`${item.img}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
-              </div>
+              <a :href="`/product/detail?id=${item.id}`">
+                <div class="col-md-12 product">
+                  <img  :src="`${item.img}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
+                </div>
+              </a>
             </div>
             <div class="row">
               <div class="col-12 d-flex align-content-center">
@@ -62,13 +66,17 @@ export default {
     return {
       shoes: [
         {
+          id: "1",
           name : "YEEZY 350 V.2 BLACK RED" ,
           img  : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494248209985536/testShoes.png?ex=653fc775&is=652d5275&hm=15f8be83723d3eac23fb5a60eea0d9dfbcf5081712ce03d1db1c7fbaf9026b19&"
         },
         {
+          id: "2",
           name : "NIKE JORDAN1 HIGH DIOR" ,
           img  : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494248646197298/testShoes2.png?ex=653fc775&is=652d5275&hm=2206c9c5d8a7bb8b02e789d9007e8879a96d8e32e8158c4a13fad55fdb587e8b&"
-        },        {
+        },        
+        {
+          id: "3",
           name : "NIKE RETRO HIGH OG CHICAGO" ,
           img  : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494248994320504/testShoes3.png?ex=653fc775&is=652d5275&hm=55f4bbaf567ee50741dae812ab294c4d45e821c04565580f30b139b93ae5d6e5&"
         },
