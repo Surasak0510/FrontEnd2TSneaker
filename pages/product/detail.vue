@@ -56,6 +56,36 @@ export default{
                 favorite: false,
         }
     },
+    methods: {
+        GetShoes() {
+
+        },
+        Getsize() {
+            const axios = require('axios');
+            let data = JSON.stringify({
+            "name": this.shoes.name
+            });
+
+            let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://twotsneaker.onrender.com/product/size',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+
+            axios.request(config)
+            .then((response) => {
+            console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+
+        }
+    },
     mounted() {
         this.id = this.$route.query.id;
     }
