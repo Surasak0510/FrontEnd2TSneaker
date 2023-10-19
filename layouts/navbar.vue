@@ -39,7 +39,7 @@
                                         <span class="visually-hidden">shopping cart</span>
                                     </span>
                                 </button>
-                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;" href="/register">
+                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;" href="/login">
                                     <img src="../static/icon/profile_circle.svg" alt="" >
                                 </a>
                             </div>
@@ -92,7 +92,15 @@ export default {
         return {
             heart: 0 ,
             cart : 0 ,
+            email: ""
         }
+    },
+    mounted() {
+        this.email = localStorage.getItem("email");
+        if (this.email === null) {
+            window.location = '/login'
+        }
+
     }
 }
 </script>

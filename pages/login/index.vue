@@ -37,6 +37,8 @@
                                                         for="form3Example4c">Password</label>
                                                 </div>
                                             </div>
+                                            
+                                            <p class="px-3">Don't have account? <a href="/login/register">create account</a></p>
 
                                             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                                 <button type="button" class="btn btn-primary btn-lg" @click="login()">login</button>
@@ -91,10 +93,10 @@ export default {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Your work has been saved',
+                    title: 'เข้าสู่ระบบสำเร็จ',
                     showConfirmButton: true,
-                    timer: 3000
                 }).then((result) => {
+                    localStorage.setItem("email", this.email);
                     if (result.isConfirmed) {
                         Swal.fire('Saved!', '', 'success')
                         window.location = '/';
@@ -102,6 +104,12 @@ export default {
                 })
             })
             .catch((error) => {
+            Swal.fire({
+                title: 'มีบางอย่างผิดปกติ',
+                text: "กรุณาใช้อีเมล์อื่น",
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+            })
             console.log(error);
             });
 

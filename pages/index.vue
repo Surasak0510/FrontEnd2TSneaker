@@ -5,7 +5,6 @@
         <slide v-for="(item , index) in promotion" :key="index">
           <a href=""><img :src="`${item.img}`" style="object-fit: cover;" class="d-block mx-auto h-100" alt="..." /></a>
         </slide>
-        <hooper-pagination slot="hooper-addons"></hooper-pagination>
       </hooper>
     </div>
     <div class="row my-4">

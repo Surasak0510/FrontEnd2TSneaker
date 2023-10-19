@@ -118,7 +118,7 @@ export default{
     
                 axios.request(config)
                 .then((response) => {
-                    console.log(JSON.stringify(response.data));
+                    console.log("register >>>>",JSON.stringify(response.data));
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -130,6 +130,12 @@ export default{
                     )
                 })
                 .catch((error) => {
+                    Swal.fire({
+                        title: 'มีบางอย่างผิดปกติ',
+                        text: "กรุณาใช้อีเมล์อื่น",
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                    })
                     console.log(error);
                 });
             }
