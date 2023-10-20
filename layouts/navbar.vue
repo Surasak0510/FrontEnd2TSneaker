@@ -23,24 +23,25 @@
                     <div class="col-12 col-md-4 my-2">
                         <div class="row ">
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="button" class="btn position-relative mx-3" style="box-shadow: none;">
+                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;">
                                     <img src="../static/icon/heart.svg" alt="">  
                                     <span v-if="heart != 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         <span class="fw-light" v-if="heart <= 99">{{ heart }}</span>
                                         <span class="fw-light" v-else>99+</span>
                                         <span class="visually-hidden">heart</span>
                                     </span>
-                                </button>
-                                <button type="button" class="btn position-relative mx-3" style="box-shadow: none;">
+                                </a>
+                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;">
                                     <img src="../static/icon/shopping_cart.svg" alt="">  
                                     <span v-if="cart != 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         <span class="fw-light" v-if="cart <= 99">{{ cart }}</span>
                                         <span class="fw-light" v-else>99+</span>
                                         <span class="visually-hidden">shopping cart</span>
                                     </span>
-                                </button>
-                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;" href="/login">
-                                    <img src="../static/icon/profile_circle.svg" alt="" >
+                                </a>
+                                <a type="button" class="btn position-relative mx-3" style="box-shadow: none;" href="/setting">
+                                    <img src="../static/icon/profile_circle.svg" alt="" v-if="user.img == null">
+                                    <img :src="`${user.img}`" alt="" style="width: 35px; height: 35px;" class="rounded-circle mx-auto" v-else>
                                 </a>
                             </div>
                         </div>

@@ -25,8 +25,17 @@
                         <div class="col-10">
                             <button class="btn btn-primary w-100 rounded-5 fw-bold font1 ยัขๅ" type="submit">Add to card</button>
                         </div>
-                        <div class="col-2">
+                        <div class="col-2" v-if="this.favorite == 'false' || this.favorite == false">
                             <input type="checkbox" @click="AddFavor()" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
+                            <label class="btn btn-outline-primary rounded-5 fw-bold m-0 p-0" for="btn-check-outlined">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 54 54" fill="none">
+                                    <circle cx="27" cy="27" r="26.5" fill="#5E17EB" fill-opacity="0.19" />
+                                    <path d="M34.1011 11.3022C31.0859 11.3022 28.3873 12.9494 26.7048 15.4762C25.0223 12.9494 22.3236 11.3022 19.3084 11.3022C14.1943 11.3022 10.0464 15.9816 10.0464 21.7652C10.0464 23.9925 10.3629 26.0515 10.9126 27.9607C13.5446 37.3193 21.6573 42.9157 25.6719 44.4505C26.2383 44.6751 27.1712 44.6751 27.7376 44.4505C31.7522 42.9157 39.8649 37.3193 42.4969 27.9607C43.0466 26.0515 43.3631 23.9925 43.3631 21.7652C43.3631 15.9816 39.2152 11.3022 34.1011 11.3022Z" fill="white"/>
+                                </svg>
+                            </label>
+                        </div>
+                        <div class="col-2" v-else>
+                            <input type="checkbox" @click="DeleteFavor()" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
                             <label class="btn btn-outline-primary rounded-5 fw-bold m-0 p-0" for="btn-check-outlined">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 54 54" fill="none">
                                     <circle cx="27" cy="27" r="26.5" fill="#5E17EB" fill-opacity="0.19" />
@@ -100,7 +109,15 @@ export default{
 
             axios.request(config)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
+                let dataFavor = response.data;
+                dataFavor.forEach(e => {
+                    if (e.UserID == this.UserID) {
+                        if (e.name == this.shoes.name) {
+                            this.favorite = e.status
+                            // console.log(this.favorite)
+                        }
+                    }
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -138,13 +155,13 @@ export default{
         DeleteFavor() {
             const axios = require('axios');
             let data = JSON.stringify({
-            "name": "NIKE JORDAN1 HIGH DIOR"
+            "name": this.shoes.name
             });
 
             let config = {
             method: 'delete',
             maxBodyLength: Infinity,
-            url: 'localhost:3000/product/dalete/favorites',
+            url: 'https://twotsneaker.onrender.com/product/dalete/favorites',
             headers: { 
                 'Content-Type': 'application/json'
             },

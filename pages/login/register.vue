@@ -14,12 +14,12 @@
                             <form class="mx-1 mx-md-4">
 
                                 <div class="row">
-                                    <div class="col-7">
-                                        <div class="mb-3">
-                                            <div class="form-text" style="margin: 5px 0px 5px 5px; font-size: medium;">อัพโหลดโลโก้ร้าน</div>
+                                    <div class="col-12">
+                                        <div class="mb-3 d-flex flex-column">
+                                            <img :src="`${previewImage}`" alt="" style="width: 100px; height: 100px;" class="rounded-circle mx-auto">
+                                            <div class="form-text" style="margin: 5px 0px 5px 5px; font-size: medium;">Your photo</div>
                                             <div class="input-group">
                                                 <input class="form-control rounded-4" type="file" ref="fileInput" @input="pickFile"  >
-                                                <!-- <img :src="`${previewImage}`" alt="" style="width: 100px; height: 100px;"> -->
                                             </div>
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                 <div class="form-outline flex-fill mb-0">
-                                    <input required type="tel" id="form3Example5c" class="form-control" v-model="tel" />
+                                    <input required type="text" id="form3Example5c" class="form-control" v-model="tel" />
                                     <label class="form-label" style="color: #94979c;" for="form3Example3c">Your phone number</label>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                 <div class="form-outline flex-fill mb-0">
-                                    <input required type="password" id="form3Example4c" class="form-control" v-model="password" />
+                                    <input required type="password" id="form3Example6c" class="form-control" v-model="password" />
                                     <label class="form-label" style="color: #94979c;" for="form3Example4c">Password</label>
                                 </div>
                             </div>
@@ -105,6 +105,7 @@ export default{
             password: "",
             Conpassword: "",
             previewImage: "",
+            tel: "",
         }
     },
     methods: {
@@ -115,7 +116,8 @@ export default{
                     "Username": this.name,
                     "Password": this.password,
                     "Email": this.email,
-                    "tel": this.tel
+                    "tel": this.tel,
+                    "img": this.previewImage
                 });
     
                 let config = {
@@ -160,8 +162,8 @@ export default{
             if (file && file[0]) {
               let reader = new FileReader
               reader.onload = e => {
-              this.data.previewImage = e.target.result
-            //   console.log(this.data.previewImage)
+              this.previewImage = e.target.result
+              console.log(this.previewImage)
             }
             reader.readAsDataURL(file[0])
             this.$emit('input', file[0])

@@ -15,9 +15,9 @@
         <slide v-for="(item , index) in shoes" :key="index" >
           <div class="col-12 ">
             <div class="row">
-              <a :href="`/product/detail?id=${item.id}`">
+              <a :href="`/product/detail?id=${item.Pro_id}`">
                 <div class="col-8 col-md-12 product">
-                  <img  :src="`${item.img}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
+                  <img  :src="`${item.image}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
                 </div>
               </a>
             </div>
@@ -35,9 +35,9 @@
         <slide v-for="(item , index) in shoes" :key="index" >
           <div class="col-12">
             <div class="row">
-              <a :href="`/product/detail?id=${item.id}`">
+              <a :href="`/product/detail?id=${item.Pro_id}`">
                 <div class="col-md-12 product">
-                  <img  :src="`${item.img}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
+                  <img  :src="`${item.image}`" style="object-fit: cover; cursor: pointer;" alt="" class="h-100 d-block mx-auto">
                 </div>
               </a>
             </div>
@@ -64,23 +64,7 @@ export default {
   },
   data() {
     return {
-      shoes: [
-        {
-          id: "1",
-          name : "YEEZY 350 V.2 BLACK RED" ,
-          img  : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494248209985536/testShoes.png?ex=653fc775&is=652d5275&hm=15f8be83723d3eac23fb5a60eea0d9dfbcf5081712ce03d1db1c7fbaf9026b19&"
-        },
-        {
-          id: "2",
-          name : "NIKE JORDAN1 HIGH DIOR" ,
-          img  : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494248646197298/testShoes2.png?ex=653fc775&is=652d5275&hm=2206c9c5d8a7bb8b02e789d9007e8879a96d8e32e8158c4a13fad55fdb587e8b&"
-        },        
-        {
-          id: "3",
-          name : "NIKE RETRO HIGH OG CHICAGO" ,
-          img  : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494248994320504/testShoes3.png?ex=653fc775&is=652d5275&hm=55f4bbaf567ee50741dae812ab294c4d45e821c04565580f30b139b93ae5d6e5&"
-        },
-      ],
+      shoes: [],
       promotion: [
         {
           img : "https://cdn.discordapp.com/attachments/1150377622820368424/1163494247601819729/testpromo.png?ex=653fc775&is=652d5275&hm=8f881b8ae0d1f1cc46d0d48c6f1b7bc5f73607f90815cee0c5bc8de91b003bfa&"
@@ -93,6 +77,31 @@ export default {
         },
       ]
     }
+  },
+  methods : {
+    GetShoes() {
+      const axios = require('axios');
+
+      let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://twotsneaker.onrender.com/product/all',
+        headers: { }
+      };
+
+      axios.request(config)
+      .then((response) => {
+        // console.log(JSON.stringify(response.data));
+        this.shoes = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    }
+  },
+  mounted() {
+    this.GetShoes();
   }
 };
 </script>
