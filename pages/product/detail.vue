@@ -2,8 +2,11 @@
     <div>
         <div class="container-fluid" style="height: calc(100vh - 25vh) ;">
             <div class="row h-100">
+                <!-- <pre>
+                    {{ shoes }}
+                </pre> -->
                 <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                    <img :src="`${shoes.img}`" alt="" class="product mx-5">
+                    <img :src="`${shoes.image}`" alt="" class="product mx-5">
                 </div>
                 <div class="col-12 col-md-6 d-flex align-self-center flex-column px-5">
                     <div class="row mb-3">
@@ -44,50 +47,48 @@ export default{
     data() {
         return {
             id: "",
-            shoes :
-                {
-                id: "1",
-                name : "YEEZY 350 V.2 BLACK RED" ,
-                img  : "https://cdn.discordapp.com/attachments/882572081861099543/1164569979195228180/Adidas-Yeezy-Boost-350-V2-Core-Black-Red-Product.webp?ex=6543b14f&is=65313c4f&hm=cc21525f50a576622580c7802cc3a3d181c20b7a7bfe54ec0be367cf9bae8e1d&",
-                type: "NewAndOutstanding"
-                },
-                sizeShout: ["36","37","38","39","40","41","42","43"],
-                BuySize: [],
-                favorite: false,
+            name: "",
+            shoes :{},
+            sizeShout: [],
+            BuySize: [],
+            favorite: false,
         }
     },
     methods: {
         GetShoes() {
-
-        },
-        Getsize() {
             const axios = require('axios');
-            let data = JSON.stringify({
-            "name": this.shoes.name
-            });
 
             let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'https://twotsneaker.onrender.com/product/size',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            data : data
+            url: 'https://twotsneaker.onrender.com/product/all',
+            headers: { }
             };
 
             axios.request(config)
             .then((response) => {
-            console.log(JSON.stringify(response.data));
+                // console.log(JSON.stringify(response.data));
+                let AllShoes = response.data;
+                AllShoes.forEach(e => {
+                    if (e.Pro_id == this.id) {
+                        this.shoes = e;
+                    }
+                });
+                AllShoes.forEach(e => {
+                    if (e.name === this.shoes.name) {
+                        this.sizeShout.push(e.size)
+                    }
+                });
             })
             .catch((error) => {
-            console.log(error);
+                console.log(error);
             });
 
         }
     },
     mounted() {
         this.id = this.$route.query.id;
+        this.GetShoes();
     }
 }
 </script>
