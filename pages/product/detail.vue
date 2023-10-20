@@ -88,17 +88,13 @@ export default{
         },
         Favor() {
             const axios = require('axios');
-            let data = JSON.stringify({
-            "UserID": this.UserID
-            });
+            let data = '';
 
             let config = {
             method: 'get',
             maxBodyLength: Infinity,
             url: 'https://twotsneaker.onrender.com/favorites/all',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
+            headers: { },
             data : data
             };
 
