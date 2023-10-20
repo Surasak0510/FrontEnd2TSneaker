@@ -92,14 +92,14 @@ export default {
         return {
             heart: 0 ,
             cart : 0 ,
-            Email: "",
+            UserID: "",
             user : {}
         }
     },
     methods: {
         GetUser() {
             const axios = require('axios');
-            let data = JSON.stringify({"Email": this.email});
+            let data = JSON.stringify({"UserID": this.UserID});
 
             let config = {
             method: 'get',
@@ -115,7 +115,7 @@ export default {
             .then((response) => {
                 let members = response.data
                 members.forEach(e => {
-                    if (e.Email == this.Email) {
+                    if (e.UserID == this.UserID) {
                         this.user = e;
                         // console.log(e);
                     }
@@ -128,12 +128,11 @@ export default {
         }
     },
     mounted() {
-        this.Email = localStorage.getItem("email");
-        if (this.Email === null) {
+        this.UserID = localStorage.getItem("UserID");
+        if (this.UserID === null) {
             window.location = '/login'
         }
         this.GetUser();
-        // console.log(this.email);
 
 
     }

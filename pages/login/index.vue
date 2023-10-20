@@ -96,6 +96,7 @@ export default {
                     title: 'เข้าสู่ระบบสำเร็จ',
                     showConfirmButton: true,
                 }).then((result) => {
+                    localStorage.setItem("UserID", response.data);
                     localStorage.setItem("email", this.email);
                     if (result.isConfirmed) {
                         Swal.fire('Saved!', '', 'success')

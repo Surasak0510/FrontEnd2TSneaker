@@ -26,7 +26,7 @@
                             <button class="btn btn-primary w-100 rounded-5 fw-bold font1 ยัขๅ" type="submit">Add to card</button>
                         </div>
                         <div class="col-2">
-                            <input type="checkbox" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
+                            <input type="checkbox" @click="AddFavor()" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
                             <label class="btn btn-outline-primary rounded-5 fw-bold m-0 p-0" for="btn-check-outlined">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 54 54" fill="none">
                                     <circle cx="27" cy="27" r="26.5" fill="#5E17EB" fill-opacity="0.19" />
@@ -46,6 +46,7 @@ export default{
     layout: "navbar",
     data() {
         return {
+            UserID : "",
             id: "",
             name: "",
             shoes :{},
@@ -84,11 +85,91 @@ export default{
                 console.log(error);
             });
 
+        },
+        Favor() {
+            const axios = require('axios');
+            let data = JSON.stringify({
+            "UserID": this.UserID
+            });
+
+            let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://twotsneaker.onrender.com/favorites/all',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+
+            axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        },
+        AddFavor() {
+            // console.log(this.UserID, this.shoes.name, this.favorite)
+            const axios = require('axios');
+            let data = JSON.stringify({
+                "UserID": this.UserID,
+                "name": this.shoes.name,
+                "status": true
+            });
+
+            let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://twotsneaker.onrender.com/product/favorites',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+
+            axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        },
+        DeleteFavor() {
+            const axios = require('axios');
+            let data = JSON.stringify({
+            "name": "NIKE JORDAN1 HIGH DIOR"
+            });
+
+            let config = {
+            method: 'delete',
+            maxBodyLength: Infinity,
+            url: 'localhost:3000/product/dalete/favorites',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+
+            axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
         }
     },
     mounted() {
+        this.UserID = localStorage.getItem("UserID");
         this.id = this.$route.query.id;
         this.GetShoes();
+        this.Favor();
     }
 }
 </script>
