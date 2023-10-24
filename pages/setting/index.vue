@@ -1,23 +1,34 @@
 <template>
-    <div class="mt-4">
-        <div class="row m-0">
-            <div class="col-4">
-                <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-Assessor-list" data-bs-toggle="list" href="#list-Assessor" role="tab" aria-controls="list-Assessor">Home</a>
-                <a class="list-group-item list-group-item-action " id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Messages</a>
-                <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-Assessor" role="tabpanel" aria-labelledby="list-Assessor-list">1</div>
-                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">2</div>
-                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">3</div>
-                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">4</div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <b-card class="container" no-body style="border: none;">
+            <b-tabs pills card vertical nav-wrapper-class="w-25" style="height: calc(100vh - 17vh);">
+            <b-tab class="font1" title="Profile" active>
+                <b-card-text>
+                    1
+                </b-card-text>
+            </b-tab>
+            <b-tab class="font1" title="Setting">
+                <b-card-text>
+                    2
+                </b-card-text>
+            </b-tab>
+            <b-tab class="font1" title="Support">
+                <b-card-text>
+                    3
+                </b-card-text>
+            </b-tab>
+            <b-tab class="font1" title="Tracking status">
+                <b-card-text>
+                    4
+                </b-card-text>
+            </b-tab>
+            <b-tab class="font1" title="Refund">
+                <b-card-text>
+                    5
+                </b-card-text>
+            </b-tab>
+            </b-tabs>
+        </b-card>
     </div>
 </template>
 

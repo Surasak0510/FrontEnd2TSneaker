@@ -104,18 +104,15 @@ export default {
                     }
                 })
             })
-            .catch((error) => {
-            Swal.fire({
-                title: 'มีบางอย่างผิดปกติ',
-                text: "กรุณาใช้อีเมล์อื่น",
-                icon: 'warning',
-                confirmButtonColor: '#3085d6',
-            })
-            console.log(error);
+            .catch((error ) => {
+                console.log(error);
+                Swal.fire({
+                    title: 'มีบางอย่างผิดปกติ',
+                    text: "กรุณาตรวจสอบข้อมูลอีกครั้ง",
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                })
             });
-
-
-
 
         }
     }

@@ -148,7 +148,7 @@ export default{
                 .catch((error) => {
                     Swal.fire({
                         title: 'มีบางอย่างผิดปกติ',
-                        text: "กรุณาใช้อีเมล์อื่น",
+                        text: "ระบบขัดข้อง",
                         icon: 'warning',
                         confirmButtonColor: '#3085d6',
                     })

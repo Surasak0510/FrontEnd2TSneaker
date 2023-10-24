@@ -78,6 +78,7 @@ export default{
             axios.request(config)
             .then((response) => {
                 // console.log(JSON.stringify(response.data));
+                const arrSize = [];
                 let AllShoes = response.data;
                 AllShoes.forEach(e => {
                     if (e.Pro_id == this.id) {
@@ -86,9 +87,10 @@ export default{
                 });
                 AllShoes.forEach(e => {
                     if (e.name === this.shoes.name) {
-                        this.sizeShout.push(e.size)
+                        arrSize.push(e.size)
                     }
                 });
+                this.sizeShout = [...new Set(arrSize)]
             })
             .catch((error) => {
                 console.log(error);
