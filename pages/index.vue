@@ -91,8 +91,16 @@ export default {
 
       axios.request(config)
       .then((response) => {
+        const DataShoes = response.data;
+        let name = "";
+        DataShoes.forEach(element => {
+          if (name != element.name) {
+              this.shoes.push(element)
+          }
+          name = element.name
+        });
         // console.log(JSON.stringify(response.data));
-        this.shoes = response.data;
+        // this.shoes = response.data;
       })
       .catch((error) => {
         console.log(error);

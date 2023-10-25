@@ -57,6 +57,7 @@ export default{
         return {
             UserID : "",
             id: "",
+            fa_id: "",
             name: "",
             shoes :{},
             sizeShout: [],
@@ -113,10 +114,11 @@ export default{
             .then((response) => {
                 let dataFavor = response.data;
                 dataFavor.forEach(e => {
+                    console.log(e)
                     if (e.UserID == this.UserID) {
-                        if (e.name == this.shoes.name) {
+                        if (e.fa_id == this.shoes.fa_id) {
                             this.favorite = e.status
-                            // console.log(this.favorite)
+                            this.fa_id = e.fa_id
                         }
                     }
                 });
@@ -157,7 +159,7 @@ export default{
         DeleteFavor() {
             const axios = require('axios');
             let data = JSON.stringify({
-            "name": this.shoes.name
+            "fa_id": this.fa_id
             });
 
             let config = {
