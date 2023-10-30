@@ -14,7 +14,7 @@
                     </div>
                     <div class="row gap-1 d-flex justify-content-center my-4" v-if="sizeShout != null">
                         <div class="col-2 m-0 d-flex justify-content-center my-3" v-for="(item,index) in sizeShout" :key="index">
-                            <input type="checkbox" class="btn-check" v-model="BuySize" :value="`${item}`" :id="`${item}`" autocomplete="off">
+                            <input type="radio" :name="`${item}`" class="btn-check" v-model="BuySize" :value="`${item}`" :id="`${item}`">
                             <label class="btn btn-outline-primary w-100 m-0 p-2 fs-4 fw-bold font1" :for="`${item}`">{{ item }}</label>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-10">
-                            <button class="btn btn-primary w-100 rounded-5 fw-bold font1 ยัขๅ" type="submit">Add to card</button>
+                            <button class="btn btn-primary w-100 rounded-5 fw-bold font1" type="submit">Add to card</button>
                         </div>
                         <div class="col-2" v-if="this.favorite == 'false' || this.favorite == false">
                             <input type="checkbox" @click="AddFavor()" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
