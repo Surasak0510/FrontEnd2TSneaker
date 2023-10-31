@@ -15,8 +15,8 @@
                         </form> -->
                         <form action="">
                             <div class="input-group">
-                                <input type="text" class="form-control rounded-start-pill p-3 " placeholder="search" aria-label="search" aria-describedby="basic-addon1">
-                                <span class="input-group-text px-1 rounded-end-pill" id="basic-addon1" style="cursor: pointer;;"><img src="../static/icon/search.svg" alt=""></span>
+                                <input type="text" class="form-control rounded-start-pill p-3 " v-model="search" placeholder="search" aria-label="search" aria-describedby="basic-addon1">
+                                <span class="input-group-text px-1 rounded-end-pill" id="basic-addon1" @click="SearchPro()" style="cursor: pointer;"><img src="../static/icon/search.svg" alt=""></span>
                             </div>
                         </form>
                     </div>
@@ -49,8 +49,8 @@
                     <div class="col-12 d-sm-block d-md-none">
                         <form action="">
                             <div class="input-group">
-                                <input type="text" class="form-control rounded-start-pill p-3 " placeholder="search" aria-label="search" aria-describedby="basic-addon1">
-                                <span class="input-group-text px-1 rounded-end-pill" id="basic-addon1" style="cursor: pointer;;"><img src="../static/icon/search.svg" alt=""></span>
+                                <input type="text" class="form-control rounded-start-pill p-3 " v-model="search" placeholder="search" >
+                                <button class=" input-group-text px-1 rounded-end-pill" @click="SearchPro()"  id="basic-addon1" style="cursor: pointer;"><img src="../static/icon/search.svg" alt=""></button>
                             </div>
                         </form>
                     </div>
@@ -65,7 +65,7 @@
                             <p class="w-100 m-0 text-center"><a href="/" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Home">Home</a></p>
                         </div>
                         <div class="col-7 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="../product/NewAndOutstanding" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="New and Outstanding">New and Outstanding</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/New and Outstanding" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="New and Outstanding">New and Outstanding</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
                             <p class="w-100 m-0 text-center"><a href="../product/Limited" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Limited">Limited</a></p>
@@ -74,7 +74,7 @@
                             <p class="w-100 m-0 text-center"><a href="../product/Men" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Men">Men</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
-                            <p class="w-100 m-0 text-center"><a href="../product/Woman" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Woman">Woman</a></p>
+                            <p class="w-100 m-0 text-center"><a href="../product/Women" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Women">Women</a></p>
                         </div>
                         <div class="col-3 p-0 col-md">
                             <p class="w-100 m-0 text-center"><a href="../product/Kid" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Kid">Kid</a></p>
@@ -94,10 +94,37 @@ export default {
             heart: 0 ,
             cart : 0 ,
             UserID: "",
-            user : {}
+            user : {},
+            search: ""
         }
     },
     methods: {
+        SearchPro(){
+            const axios = require('axios');
+            let data = JSON.stringify({
+                "name": "NIKE AIR"
+            });
+
+            let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://twotsneaker.onrender.com/product/search',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+            };
+
+            axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+        },
         GetUser() {
             const axios = require('axios');
             let data = JSON.stringify({"UserID": this.UserID});
@@ -134,7 +161,6 @@ export default {
             window.location = '/login'
         }
         this.GetUser();
-
 
     }
 }

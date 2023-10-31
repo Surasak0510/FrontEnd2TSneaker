@@ -40,7 +40,7 @@ export default {
         product() {
             this.type
             const axios = require('axios');
-
+            console.log(this.type)
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,

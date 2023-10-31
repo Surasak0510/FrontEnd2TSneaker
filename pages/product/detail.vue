@@ -14,8 +14,8 @@
                     </div>
                     <div class="row gap-1 d-flex justify-content-center my-4" v-if="sizeShout != null">
                         <div class="col-2 m-0 d-flex justify-content-center my-3" v-for="(item,index) in sizeShout" :key="index">
-                            <input type="radio" :name="`${item}`" class="btn-check" v-model="BuySize" :value="`${item}`" :id="`${item}`">
-                            <label class="btn btn-outline-primary w-100 m-0 p-2 fs-4 fw-bold font1" :for="`${item}`">{{ item }}</label>
+                            <input type="radio" :name="`${item.Pro_id}`" class="btn-check" v-model="AddCart" :value="`${item.Pro_id}`" :id="`${item.Pro_id}`">
+                            <label class="btn btn-outline-primary w-100 m-0 p-2 fs-4 fw-bold font1" :for="`${item.Pro_id}`">{{ item.size }}</label>
                         </div>
                     </div>
                     <div class="row" v-else>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-10">
-                            <button class="btn btn-primary w-100 rounded-5 fw-bold font1" type="submit">Add to card</button>
+                            <button class="btn btn-primary w-100 rounded-5 fw-bold font1" @click="Cart()" type="submit">Add to card</button>
                         </div>
                         <div class="col-2" v-if="this.favorite == 'false' || this.favorite == false">
                             <input type="checkbox" @click="AddFavor()" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+const Swal = require('sweetalert2')
 export default{
     layout: "navbar",
     data() {
@@ -63,6 +64,8 @@ export default{
             sizeShout: [],
             BuySize: [],
             favorite: false,
+            AddPro_id: "",
+            AddCart: null
         }
     },
     methods: {
@@ -88,7 +91,7 @@ export default{
                 });
                 AllShoes.forEach(e => {
                     if (e.name === this.shoes.name) {
-                        arrSize.push(e.size)
+                        arrSize.push(e)
                     }
                 });
                 this.sizeShout = [...new Set(arrSize)]
@@ -96,6 +99,70 @@ export default{
             .catch((error) => {
                 console.log(error);
             });
+
+        },
+        Cart() {
+        Swal.fire({
+            title: 'คุณต้องการเพิ่มเข้าสู่ตระกร้าใช่ไหม',
+            // text: 'Do you want to add to cart ?',
+            imageUrl: this.shoes.image,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'shoes image',
+            confirmButtonText: 'ตกลง'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                const axios = require('axios');
+                this.sizeShout.forEach(element => {
+                    if (element.Pro_id == this.AddCart) {
+                        console.log(element)
+                        let data = JSON.stringify({
+                            "UserID": this.UserID,
+                            "Pro_id": element.Pro_id,
+                            "name": element.name,
+                            "price": element.price,
+                            "image": element.image,
+                            "brand": element.brand,
+                            "color": element.color,
+                            "amount": element.amount,
+                            "types": element.types,
+                            "size": element.size
+                        });
+                        let config = {
+                            method: 'post',
+                            maxBodyLength: Infinity,
+                            url: 'https://twotsneaker.onrender.com/cart',
+                            headers: { 
+                                'Content-Type': 'application/json'
+                            },
+                            data : data
+                        };
+                        axios.request(config)
+                        .then((response) => {
+                            console.log(JSON.stringify(response.data));
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'เพิ่มเข้าสู่ตระกร้าเสร็จสิ้น',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            Swal.fire({
+                                title: 'มีบางอย่างผิดปกติ',
+                                text: "ระบบขัดข้อง",
+                                icon: 'warning',
+                                confirmButtonColor: '#3085d6',
+                            })
+                        });
+                    }
+                });
+                
+            }
+        })
 
         },
         Favor() {
