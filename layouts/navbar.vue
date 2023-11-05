@@ -99,29 +99,23 @@ export default {
         }
     },
     methods: {
-        SearchPro(){
+        SearchPro() {
             const axios = require('axios');
-            let data = JSON.stringify({
-                "name": "NIKE AIR"
-            });
-
-            let config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: 'https://twotsneaker.onrender.com/product/search',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            data : data
+            
+            const config = {
+                method: 'get',
+                url: `https://twotsneaker.onrender.com/product/search?name=${this.search}`,
+                headers: {}
             };
 
             axios.request(config)
-            .then((response) => {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((response) => {
+                    // console.log("search >>>>", JSON.stringify(response.data));
+                    window.location = `/product/detail?id=${response.data.Pro_id}`
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         },
         GetUser() {
             const axios = require('axios');
