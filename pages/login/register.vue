@@ -13,7 +13,7 @@
 
                             <form class="mx-1 mx-md-4">
 
-                                <!-- <div class="row">
+                                <div class="row">
                                     <div class="col-12">
                                         <div class="mb-3 d-flex flex-column">
                                             <img :src="`${previewImage}`" alt="" style="width: 100px; height: 100px;" class="rounded-circle mx-auto">
@@ -23,7 +23,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
