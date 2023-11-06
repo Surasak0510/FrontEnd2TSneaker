@@ -11,7 +11,7 @@
                                         <p class="mb-0">Full Name</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${User.Username}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${Username}`">
                                     </div>
                                 </div>
                                 <hr>
@@ -20,7 +20,7 @@
                                         <p class="mb-0">Email</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${User.Email}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${Email}`">
                                     </div>
                                 </div>
                                 <hr>
@@ -29,7 +29,7 @@
                                         <p class="mb-0">Phone</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${User.tel}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${tel}`">
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                         <p class="mb-0">Country</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${Location.country}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${country}`">
                                     </div>
                                 </div>
                                 <hr>
@@ -54,7 +54,7 @@
                                         <p class="mb-0">Province</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${Location.province}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${province}`">
                                     </div>
                                 </div>
                                 <hr>
@@ -63,7 +63,7 @@
                                         <p class="mb-0">District</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${Location.district}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${district}`">
                                     </div>
                                 </div>
                                 <hr>
@@ -72,7 +72,7 @@
                                         <p class="mb-0">Postcode</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${Location.postcode}`">
+                                        <input class="text-muted mb-0 form-control" :value="`${postcode}`">
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="row px-3">
-                    <button type="button" class="btn btn-primary">save</button>
+                    <button type="button" class="btn btn-primary" @click="Update()">save</button>
                 </div>
             </div>
         </section>
@@ -88,15 +88,98 @@
 </template>
 
 <script>
+const Swal = require('sweetalert2')
 export default {
   name: 'UserSetting',
   data() {
     return{
+        UserID: "",
         User: {},
         Location: {},
+        Username: "",
+        Email: "",
+        tel: "",
+        country: "",
+        province: "",
+        district: "",
+        postcode: ""
     }
   },
   methods: {
+    async Update() {
+        if (
+            this.Username.length == 0 ||
+            this.Email.length == 0 ||
+            this.tel.length == 0 ||
+            this.country.length == 0 ||
+            this.province.length == 0 ||
+            this.district.length == 0 ||
+            this.postcode.length == 0
+        ) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "No information found!",
+            });
+        } else {
+            try {
+                const axios = require('axios');
+
+                // อัปเดตข้อมูลผู้ใช้
+                let dataUser = JSON.stringify({
+                    "Username": this.Username,
+                    "Email": this.Email,
+                    "tel": this.tel,
+                });
+
+                let configUser = {
+                    method: 'patch',
+                    maxBodyLength: Infinity,
+                    url: `https://twotsneaker.onrender.com/update/profile/${this.UserID}`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    data: dataUser,
+                };
+
+                const userResponse = await axios.request(configUser);
+                console.log(JSON.stringify(userResponse.data));
+
+                // อัปเดตข้อมูลที่อยู่
+                let dataLoc = JSON.stringify({
+                    "country": this.country,
+                    "district": this.district,
+                    "province": this.province,
+                    "postcode": this.postcode,
+                    "UserID": this.UserID,
+                });
+
+                let configLoc = {
+                    method: 'patch',
+                    maxBodyLength: Infinity,
+                    url: 'https://twotsneaker.onrender.com/location',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    data: dataLoc,
+                };
+
+                const locationResponse = await axios.request(configLoc);
+
+                console.log(JSON.stringify(locationResponse.data));
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Update successful!',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    },
     getLoc() {
         const axios = require('axios');
 
@@ -110,7 +193,12 @@ export default {
         axios.request(config)
         .then((response) => {
             this.Location = response.data[0];
-            console.log(JSON.stringify(response.data[0]));
+            this.country = this.Location.country;
+            this.province = this.Location.province;
+            this.district = this.Location.district;
+            this.postcode = this.Location.postcode;
+            
+            // console.log(JSON.stringify(response.data[0]));
         })
         .catch((error) => {
             console.log(error);
@@ -133,6 +221,9 @@ export default {
             DataUser.forEach(element => {
                 if (element.UserID == this.UserID) {
                     this.User = element;
+                    this.Username = element.Username;
+                    this.Email = element.Email;
+                    this.tel = element.tel;
                 }
             });
             // console.log(JSON.stringify(response.data));
