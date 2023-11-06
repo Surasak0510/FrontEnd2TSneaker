@@ -104,18 +104,18 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border-0"> 
-                                            <input class="form-control" type="text" placeholder="Card number">
+                                            <input class="form-control" v-model="CardNumber" type="text" placeholder="Card number">
                                         </div>
                                     </div>
                                     <div class="col-6"> 
-                                        <input class="form-control my-3" type="text" placeholder="MM/YY">
+                                        <input class="form-control my-3" v-model="CardDate" type="text" placeholder="MM/YY">
                                     </div>
                                     <div class="col-6"> 
-                                        <input class="form-control my-3" type="text" placeholder="cvv">
+                                        <input class="form-control my-3" v-model="CardCVV" type="text" placeholder="cvv">
                                     </div>
                                     <!-- <p class="p-blue h8 fw-bold mb-3">MORE PAYMENT METHODS</p> -->
                                 </div>
-                                <div class="btn btn-primary d-block h8">
+                                <button class="btn btn-primary d-block h8 w-100" @click="Buy()">
                                     PAY ฿ 
                                     <span class="fas fa-dollar-sign ms-2">
                                     </span>
@@ -124,7 +124,7 @@
                                         <style>svg{fill:#ffffff}</style>
                                         <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
                                     </svg>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -148,9 +148,31 @@ export default {
             STRprice: "",
             User: {},
             STRTotlePrice: "",
+            CardNumber: "",
+            CardDate: "",
+            CardCVV: "",
         }
     },
     methods: { 
+        Buy() {
+            if (this.CardNumber.length == 0 || this.CardDate.length == 0 || this.CardCVV.length == 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "No information found!",
+                    // footer: '<a href="#">Why do I have this issue?</a>'
+                });
+            }
+            else{
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Buy success!",
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            }
+        },
         getUser() {
             const axios = require('axios');
 
