@@ -13,7 +13,7 @@
 
                             <form class="mx-1 mx-md-4">
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-12">
                                         <div class="mb-3 d-flex flex-column">
                                             <img :src="`${previewImage}`" alt="" style="width: 100px; height: 100px;" class="rounded-circle mx-auto">
@@ -23,7 +23,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -104,35 +104,34 @@ export default{
             email: "",
             password: "",
             Conpassword: "",
-            previewImage: "",
+            // previewImage: "",
             tel: "",
         }
     },
     methods: {
         register() {
-            if (this.password == this.Conpassword) {
+            if (this.password === this.Conpassword) { // เปลี่ยน "==" เป็น "==="
                 const axios = require('axios');
                 let data = JSON.stringify({
                     "Username": this.name,
                     "Password": this.password,
                     "Email": this.email,
                     "tel": this.tel,
-                    "img": this.previewImage
+                    // "img": this.previewImage
                 });
-    
+
                 let config = {
-                method: 'post',
-                maxBodyLength: Infinity,
-                url: 'https://twotsneaker.onrender.com/register',
-                headers: { 
-                    'Content-Type': 'application/json'
-                },
-                data : data
+                    method: 'post',
+                    url: 'https://twotsneaker.onrender.com/register',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                    data: data
                 };
-    
+
                 axios.request(config)
                 .then((response) => {
-                    console.log("register >>>>",JSON.stringify(response.data));
+                    console.log("register >>>>", JSON.stringify(response.data));
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -140,10 +139,9 @@ export default{
                         showConfirmButton: true,
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location = '/login'
+                            window.location = '/login';
                         }
-                    }
-                    )
+                    });
                 })
                 .catch((error) => {
                     Swal.fire({
@@ -151,24 +149,31 @@ export default{
                         text: "ระบบขัดข้อง",
                         icon: 'warning',
                         confirmButtonColor: '#3085d6',
-                    })
+                    });
                     console.log(error);
+                });
+            } else {
+                // เพิ่มโค้ดสำหรับกรณีที่รหัสผ่านไม่ตรงกัน
+                Swal.fire({
+                    title: 'รหัสผ่านไม่ตรงกัน',
+                    text: 'กรุณาตรวจสอบรหัสผ่านอีกครั้ง',
+                    icon: 'error',
                 });
             }
         },
-        pickFile () {
-            let input = this.$refs.fileInput
-            let file = input.files
-            if (file && file[0]) {
-              let reader = new FileReader
-              reader.onload = e => {
-              this.previewImage = e.target.result
-              console.log(this.previewImage)
-            }
-            reader.readAsDataURL(file[0])
-            this.$emit('input', file[0])
-            }
-        },
+        // pickFile () {
+        //     let input = this.$refs.fileInput
+        //     let file = input.files
+        //     if (file && file[0]) {
+        //       let reader = new FileReader
+        //       reader.onload = e => {
+        //       this.previewImage = e.target.result
+        //       console.log(this.previewImage)
+        //     }
+        //     reader.readAsDataURL(file[0])
+        //     this.$emit('input', file[0])
+        //     }
+        // },
     }
 }
 </script>
