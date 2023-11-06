@@ -104,7 +104,7 @@ export default{
             email: "",
             password: "",
             Conpassword: "",
-            // previewImage: "",
+            previewImage: "",
             tel: "",
         }
     },
@@ -117,12 +117,13 @@ export default{
                     "Password": this.password,
                     "Email": this.email,
                     "tel": this.tel,
-                    // "img": this.previewImage
+                    "img": this.previewImage
                 });
 
                 let config = {
                     method: 'post',
                     url: 'https://twotsneaker.onrender.com/register',
+                    maxBodyLength: Infinity,
                     headers: { 
                         'Content-Type': 'application/json'
                     },
@@ -161,19 +162,19 @@ export default{
                 });
             }
         },
-        // pickFile () {
-        //     let input = this.$refs.fileInput
-        //     let file = input.files
-        //     if (file && file[0]) {
-        //       let reader = new FileReader
-        //       reader.onload = e => {
-        //       this.previewImage = e.target.result
-        //       console.log(this.previewImage)
-        //     }
-        //     reader.readAsDataURL(file[0])
-        //     this.$emit('input', file[0])
-        //     }
-        // },
+        pickFile () {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+              let reader = new FileReader
+              reader.onload = e => {
+              this.previewImage = e.target.result
+              console.log(this.previewImage)
+            }
+            reader.readAsDataURL(file[0])
+            this.$emit('input', file[0])
+            }
+        },
     }
 }
 </script>
