@@ -110,7 +110,7 @@
                                         <input class="form-control my-3" v-model="CardDate" type="text" placeholder="MM/YY">
                                     </div>
                                     <div class="col-6"> 
-                                        <input class="form-control my-3" v-model="CardCVV" type="text" placeholder="cvv">
+                                        <input class="form-control my-3" v-model="CardCVC" type="text" placeholder="cvc">
                                     </div>
                                     <!-- <p class="p-blue h8 fw-bold mb-3">MORE PAYMENT METHODS</p> -->
                                 </div>
@@ -149,7 +149,7 @@ export default {
             STRTotlePrice: "",
             CardNumber: "",
             CardDate: "",
-            CardCVV: "",
+            CardCVC: "",
             Location: null,
         }
     },
@@ -175,7 +175,7 @@ export default {
 
         },
         Buy() {
-            if (this.CardNumber.length === 0 || this.CardDate.length === 0 || this.CardCVV.length === 0) {
+            if (this.CardNumber.length === 0 || this.CardDate.length === 0 || this.CardCVC.length === 0) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
