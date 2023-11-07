@@ -138,6 +138,8 @@ export default {
                     if (e.UserID == this.UserID) {
                         this.user = e;
                         // console.log(e);
+                    }else{
+                        window.location = '/login'
                     }
                 });
                 // console.log(JSON.stringify(response.data));
