@@ -9,7 +9,6 @@
                                 <div class="col-md-8 ps-0 ">
                                     <p class="ps-3 textmuted fw-bold h6 mb-0">TOTAL RECIEVED</p>
                                     <p class="h1 fw-bold d-flex"> 
-                                        <span class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>
                                         {{ STRprice }}
                                     </p>
                                     <!-- <p class="ms-3 px-2 bg-green">+10% since last month</p> -->
@@ -77,8 +76,8 @@
                     <div class="box-left"  style="position: sticky; top: 35px;">
                         <p class="textmuted h8">Invoice</p>
                         <p class="fw-bold h7">{{ User.Username }}</p>
-                        <p class="textmuted h8">3897 Hickroy St, salt Lake city</p>
-                        <p class="textmuted h8 mb-2">Utah, United States 84104</p>
+                        <p class="textmuted h8" v-if="Location == null"> - </p>
+                        <p class="textmuted h8" v-else>{{ Location.district }} {{ Location.province }} {{ Location.country }} {{ Location.postcode }}</p>
                         <div class="h8 py-2">
                             <div class="row" v-for="(item,index) in Cart" :key="index">
                                 <div class=" col-9 p-2 border" >
@@ -151,25 +150,66 @@ export default {
             CardNumber: "",
             CardDate: "",
             CardCVV: "",
+            Location: null,
         }
     },
-    methods: { 
+    methods: {      
+        getLoc() {
+            const axios = require('axios');
+
+            let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `https://twotsneaker.onrender.com/location/user?UserID=${this.UserID}`,
+            headers: { }
+            };
+
+            axios.request(config)
+            .then((response) => {
+                this.Location = response.data[0];
+                // console.log(JSON.stringify(response.data[0]));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        },
         Buy() {
-            if (this.CardNumber.length == 0 || this.CardDate.length == 0 || this.CardCVV.length == 0) {
+            if (this.CardNumber.length === 0 || this.CardDate.length === 0 || this.CardCVV.length === 0) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "No information found!",
-                    // footer: '<a href="#">Why do I have this issue?</a>'
+                    text: "No information found!"
                 });
-            }
-            else{
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Buy success!",
-                    showConfirmButton: false,
-                    timer: 2500
+            } else {
+                let Pro_id = this.Cart.map(element => element.Pro_id);
+
+                const axios = require('axios');
+                let requestData = {
+                    UserID: this.UserID,
+                    amount: 1,
+                    Pro_id: Pro_id
+                };
+
+                axios.post('https://twotsneaker.onrender.com/buyProducts', requestData, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then((response) => {
+                    console.log(JSON.stringify(response.data));
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Buy success!",
+                        showConfirmButton: false,
+                        timer: 2500
+                    }).then(() => {
+                        window.location = '/';
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
                 });
             }
         },
@@ -232,6 +272,7 @@ export default {
         this.UserID = localStorage.getItem("UserID");
         this.getCart()
         this.getUser()
+        this.getLoc()
     }
 }
 </script>

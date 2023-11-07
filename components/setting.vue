@@ -145,7 +145,7 @@ export default {
                 };
 
                 const userResponse = await axios.request(configUser);
-                console.log(JSON.stringify(userResponse.data));
+                // console.log(JSON.stringify(userResponse.data));
 
                 // อัปเดตข้อมูลที่อยู่
                 let dataLoc = JSON.stringify({
@@ -168,7 +168,7 @@ export default {
 
                 const locationResponse = await axios.request(configLoc);
 
-                console.log(JSON.stringify(locationResponse.data));
+                // console.log(JSON.stringify(locationResponse.data));
 
                 Swal.fire({
                     position: 'center',

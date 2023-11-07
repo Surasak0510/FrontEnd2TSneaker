@@ -38,7 +38,8 @@
                                 <p class="mb-0">Address</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ Location.district }} {{ Location.province }} {{ Location.country }} {{ Location.postcode }}</p>
+                                <p class="text-muted mb-0" v-if="Location == null"> - </p>
+                                <p class="text-muted mb-0" v-else>{{ Location.district }} {{ Location.province }} {{ Location.country }} {{ Location.postcode }}</p>
                             </div>
                             </div>
                         </div>
@@ -56,7 +57,7 @@ export default {
   data() {
     return{
         User: {},
-        Location: {},
+        Location: null,
     }
   },
   methods: {

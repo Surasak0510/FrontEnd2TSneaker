@@ -4,10 +4,10 @@
             <div class="card">
                 <div class="row d-flex justify-content-between px-3 top">
                     <div class="d-flex">
-                        <h5>ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span></h5>
+                        <h5>ORDER <span class="text-primary font-weight-bold">#{{ pay_id }}</span></h5>
                     </div>
                     <div class="d-flex flex-column text-sm-right">
-                        <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
+                        <p class="mb-0">Expected Arrival <span>{{ DateTrack }}</span></p>
                     </div>
                 </div>
                 <!-- Add class 'active' to progress -->
@@ -57,8 +57,37 @@ export default {
     name: 'tracking',
     data() {
         return {
+            track: null,
+            pay_id: "",
+            DateTrack: ""
+        }
+    },
+    methods: {
+        getPay() {
+            const axios = require('axios');
+
+            let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://twotsneaker.onrender.com/payments?UserID=43',
+            headers: { }
+            };
+
+            axios.request(config)
+            .then((response) => {
+                this.track = response.data[0]
+                this.DateTrack = response.data[0].Date
+                this.pay_id = response.data[0].pay_id
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
         }
+    },
+    mounted() {
+        this.getPay()
     }
 }
 </script>
