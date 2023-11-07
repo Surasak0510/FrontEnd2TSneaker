@@ -11,7 +11,7 @@
                                         <p class="mb-0">Full Name</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${Username}`">
+                                        <input class="text-muted mb-0 form-control" v-model="Username">
                                     </div>
                                 </div>
                                 <hr>
@@ -20,7 +20,7 @@
                                         <p class="mb-0">Email</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${Email}`">
+                                        <input class="text-muted mb-0 form-control" v-model="Email">
                                     </div>
                                 </div>
                                 <hr>
@@ -29,7 +29,7 @@
                                         <p class="mb-0">Phone</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${tel}`">
+                                        <input class="text-muted mb-0 form-control" v-model="tel">
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                         <p class="mb-0">Country</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${country}`">
+                                        <input class="text-muted mb-0 form-control" v-model="country">
                                     </div>
                                 </div>
                                 <hr>
@@ -54,7 +54,7 @@
                                         <p class="mb-0">Province</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${province}`">
+                                        <input class="text-muted mb-0 form-control" v-model="province">
                                     </div>
                                 </div>
                                 <hr>
@@ -63,7 +63,7 @@
                                         <p class="mb-0">District</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${district}`">
+                                        <input class="text-muted mb-0 form-control" v-model="district">
                                     </div>
                                 </div>
                                 <hr>
@@ -72,7 +72,7 @@
                                         <p class="mb-0">Postcode</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input class="text-muted mb-0 form-control" :value="`${postcode}`">
+                                        <input class="text-muted mb-0 form-control" v-model="postcode">
                                     </div>
                                 </div>
                             </div>
@@ -132,6 +132,8 @@ export default {
                     "tel": this.tel,
                 });
 
+                console.table(">>>>>>>",dataUser)
+
                 let configUser = {
                     method: 'patch',
                     maxBodyLength: Infinity,
@@ -174,6 +176,8 @@ export default {
                     title: 'Update successful!',
                     showConfirmButton: false,
                     timer: 3000
+                }).then(() => {
+                    window.location.reload();
                 })
             } catch (error) {
                 console.log(error);

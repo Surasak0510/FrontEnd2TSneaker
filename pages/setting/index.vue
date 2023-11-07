@@ -14,9 +14,7 @@
                     </b-card-text>
                 </b-tab>
                 <b-tab class="font1" title="Tracking status">
-                    <b-card-text>
-                        4
-                    </b-card-text>
+                    <Tracking/>
                 </b-tab>
                 <b-tab class="font1" title="Refund">
                     <b-card-text>
@@ -31,12 +29,13 @@
 <script>
 import User from '~/components/User.vue';
 import UserSetting from '~/components/setting.vue';
+import Tracking from '~/components/tracking .vue';
 
 export default {
     layout: "navbar",
     data() {
         return {};
     },
-    components: { UserSetting }
+    components: { UserSetting, Tracking }
 }
 </script>

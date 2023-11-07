@@ -73,7 +73,7 @@ export default {
         axios.request(config)
         .then((response) => {
             this.Location = response.data[0];
-            console.log(JSON.stringify(response.data[0]));
+            // console.log(JSON.stringify(response.data[0]));
         })
         .catch((error) => {
             console.log(error);
