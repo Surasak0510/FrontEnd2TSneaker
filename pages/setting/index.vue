@@ -9,9 +9,7 @@
                     <UserSetting/>
                 </b-tab>
                 <b-tab class="font1" title="Support">
-                    <b-card-text>
-                        3
-                    </b-card-text>
+                    <Chat/>
                 </b-tab>
                 <b-tab class="font1" title="Tracking status">
                     <Tracking/>
@@ -27,6 +25,7 @@
 </template>
 
 <script>
+import Chat from '~/components/Chat.vue';
 import User from '~/components/User.vue';
 import UserSetting from '~/components/setting.vue';
 import Tracking from '~/components/tracking .vue';
@@ -36,6 +35,6 @@ export default {
     data() {
         return {};
     },
-    components: { UserSetting, Tracking }
+    components: { UserSetting, Tracking, Chat }
 }
 </script>
