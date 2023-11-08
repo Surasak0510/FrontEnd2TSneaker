@@ -79,6 +79,9 @@
                         <div class="col-3 p-0 col-md">
                             <p class="w-100 m-0 text-center"><a href="../product/Kid" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" value="Kid">Kid</a></p>
                         </div>
+                        <div class="col-3 p-0 col-md" v-if="user.Status == 'ADMIN'">
+                            <p class="w-100 m-0 text-center"><a href="/admin" style="box-shadow: none; border-radius: 25px;" class="btn navhover mx-0 fw-bold fs-5 font1" type="link" >ADMIN</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,8 +141,6 @@ export default {
                     if (e.UserID == this.UserID) {
                         this.user = e;
                         // console.log(e);
-                    }else{
-                        window.location = '/login'
                     }
                 });
                 // console.log(JSON.stringify(response.data));

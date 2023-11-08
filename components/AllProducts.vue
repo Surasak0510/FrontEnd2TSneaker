@@ -6,7 +6,7 @@
                     <div class="col-10">
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h3 class="fw-normal mb-0 text-black font1">Shopping Cart</h3>
+                            <h3 class="fw-normal mb-0 text-black font1">All Users</h3>
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="inputGroupSelect01">types</label>
                                 <select class="form-select" id="inputGroupSelect01" v-model="ShowType">

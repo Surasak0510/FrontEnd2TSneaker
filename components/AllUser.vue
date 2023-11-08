@@ -6,7 +6,7 @@
                     <div class="col-10">
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h3 class="fw-normal mb-0 text-black font1">All Product</h3>
+                            <h3 class="fw-normal mb-0 text-black font1">All User</h3>
                         </div>
                         <div class="card rounded-3 mb-4" v-for="(item, index) in DataUser" :key="index">
                             <div class="card-body p-2 btn btn-outline-success m-0" @click="User(item)">

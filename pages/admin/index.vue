@@ -45,6 +45,9 @@ export default {
                         //     window.location = '/'
                         // }
                     }
+                    if (element.UserID == this.UserID && element.Status == 'USER') {
+                        window.location = '/'
+                    }
                 });
                 // console.log(JSON.stringify(response.data));
             })
