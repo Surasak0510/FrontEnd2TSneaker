@@ -7,8 +7,19 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h3 class="fw-normal mb-0 text-black font1">Shopping Cart</h3>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">types</label>
+                                <select class="form-select" id="inputGroupSelect01" v-model="ShowType">
+                                    <option value="All" selected>All</option>
+                                    <option value="New and Outstanding">New and Outstanding</option>
+                                    <option value="Limited">Limited</option>
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Kid">Kid</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="card rounded-3 mb-4" v-for="(item, index) in DataShoes" :key="index">
+                        <div class="card rounded-3 mb-4" v-for="(item, index) in DataShoes" :key="index" v-if="item.types == ShowType || ShowType == 'All'">
                             <div class="card-body p-4">
                                 <div class="row d-flex justify-content-between align-items-center">
                                     <a :href="`/product/detail?id=${item.Pro_id}`" class="col-md-2 col-lg-2 col-xl-2">
@@ -46,7 +57,7 @@
             </div>
         </section>
 
-        <b-modal v-model="show" :title="Product.name">
+        <b-modal v-model="show" centered hide-footer :title="`${Product.Pro_id} : ${Product.name}`" v-if="Product != null">
             <div class="row">
                 <div class="col-12">
                     <div class="row my-2 d-flex justify-content-center">
@@ -100,10 +111,16 @@
                             <input type="number" class="form-control" v-model="Product.price">
                         </div>
                     </div>
+                    <div class="row mx-0 mt-3">
+                        <div class="col-12 gap-3">
+                            <button type="button" class="btn btn-danger" @click="show = false">cancle</button>
+                            <button type="button" class="btn btn-success" @click="UpdateProduct()">save</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </b-modal>
-        
+
     </div>
 </template>
 
@@ -116,10 +133,44 @@ export default {
             UserID: "",
             DataShoes: null,
             Product: null,
-            show: false
+            show: false,
+            ShowType: "All"
         }
     },
     methods: {
+        UpdateProduct() {
+            const axios = require('axios');
+            let data = JSON.stringify({
+                "Pro_id": this.Product.Pro_id,
+                "amount": this.Product.amount,
+                "name": this.Product.name,
+                "color": this.Product.color,
+                "size": this.Product.size,
+                "brand": this.Product.brand,
+                "types": this.Product.types,
+                "price": this.Product.price,
+            });
+
+            let config = {
+                method: 'patch',
+                maxBodyLength: Infinity,
+                url: 'https://twotsneaker.onrender.com/product/update',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    console.log(JSON.stringify(response.data));
+                    this.show = false
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+        },
         EditProduct(item) {
             this.show = true
             this.Product = item
