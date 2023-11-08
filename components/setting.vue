@@ -130,6 +130,7 @@ export default {
                     "Username": this.Username,
                     "Email": this.Email,
                     "tel": this.tel,
+                    "Status": "USER"
                 });
 
                 console.table(">>>>>>>",dataUser)
