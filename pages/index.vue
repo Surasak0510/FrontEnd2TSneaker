@@ -62,6 +62,11 @@ export default {
     Hooper,
     Slide,
   },
+  head() {
+      return {
+        title: '2TSneaker | Home',
+      }
+    },
   data() {
     return {
       shoes: [],

@@ -137,6 +137,11 @@
 const Swal = require('sweetalert2')
 export default {
     layout: "navbar",
+    head() {
+      return {
+        title: '2TSneaker | Payment',
+      }
+    },
     data() {
         return {
             UserID: "",

@@ -19,6 +19,11 @@ import AllUser from '../../components/AllUser.vue'
 export default {
   components: { AllUser, AllProducts },
     layout: "navbar",
+    head() {
+      return {
+        title: '2TSneaker | Admin',
+      }
+    },
     data() {
         return {
 

@@ -31,6 +31,11 @@ import Tracking from '~/components/tracking .vue';
 
 export default {
     layout: "navbar",
+    head() {
+      return {
+        title: '2TSneaker | Settings',
+      }
+    },
     data() {
         return {};
     },

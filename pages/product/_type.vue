@@ -36,6 +36,11 @@ export default {
             shoes: [],
         }
     },
+    head() {
+      return {
+        title: '2TSneaker | Products',
+      }
+    },
     methods: {
         product() {
             this.type
