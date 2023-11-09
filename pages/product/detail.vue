@@ -23,7 +23,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-10">
-                            <button class="btn btn-primary w-100 rounded-5 fw-bold font1" @click="Cart()" type="submit">Add to card</button>
+                            <button class="btn btn-primary w-100 rounded-5 fw-bold font1" @click="Cart()" type="submit">Add to cart</button>
                         </div>
                         <div class="col-2" >
                             <input type="checkbox" @click="AddFavor()" v-model="favorite" class="btn-check m-0" id="btn-check-outlined" autocomplete="off">
