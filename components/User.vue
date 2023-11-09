@@ -46,6 +46,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <a type="button" class="btn btn-outline-success" target="popup" onclick="window.open('https://twotsneaker.onrender.com/Chat','2tsneaker-Chat','width=600,height=400')" href="https://twotsneaker.onrender.com/Chat">Chat</a>
+                        <button type="button" class="btn btn-danger" @click="Logout()">Logout</button>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -61,6 +67,12 @@ export default {
     }
   },
   methods: {
+    Logout() {
+        localStorage.removeItem('UserID');
+        setTimeout(() => {
+            window.location = '/login'
+        }, 1000);
+    },
     getLoc() {
         const axios = require('axios');
 
